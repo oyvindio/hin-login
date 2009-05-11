@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8
 
 # Originally written by Svein-Erik Larsen <feinom@gmail.com>
 # Modified by Øyvind Øvergaard <oyvind.overgaard@gmail.com>
@@ -20,7 +21,8 @@ def getlogonstatus(websitedata):
         return "Logged in as: " + loginuser
 
 def logonstatus():
-    """Uses the getlogonstatus function and prints out a user friendly message"""
+    """Uses the getlogonstatus function and prints out a user friendly
+    message"""
     site = urllib2.urlopen("https://acs.hin.no/logon")
     the_page = site.read()
     print getlogonstatus(the_page)
@@ -29,8 +31,10 @@ def logonstatus():
 
 def find_value(pagesplit, fieldname):
     """Tries to find the 'secret' and 'vernier' fields"""
-    loc_field = pagesplit.index('name=' + fieldname) #location of field. The value is +2 fields relative to this.
+    # location of field. The value is +2 fields relative to this.
+    loc_field = pagesplit.index('name=' + fieldname) 
     loc_value = loc_field + 2
+
     return pagesplit[loc_value].lstrip('value="').rstrip('">')
 
 def log_in():
