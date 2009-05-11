@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
+#
+# Originally written by Svein-Erik Larsen <feinom@gmail.com> to be used at UiA.
+# Modified by Øyvind Øvergaard <oyvind.overgaard@gmail.com> for use at HiN.
+#
 
-# Originally written by Svein-Erik Larsen <feinom@gmail.com>
-# Modified by Øyvind Øvergaard <oyvind.overgaard@gmail.com>
-
-"""Log in and out of HiN's wireless network"""
+"""Use the authentication on HiNs wireless network from the command line."""
 
 import urllib2, getpass, sys
 from optparse import OptionParser
