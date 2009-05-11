@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+# Originally written by Svein-Erik Larsen <feinom@gmail.com>
+# Modified by Øyvind Øvergaard <oyvind.overgaard@gmail.com>
+
 """Log in and out of HiN's wireless network"""
 
 import urllib2, getpass, sys
