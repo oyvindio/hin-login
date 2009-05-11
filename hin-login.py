@@ -1,43 +1,8 @@
 #!/usr/bin/env python
 """Log in and out of HiN's wireless network"""
 
-import urllib2, getpass, getopt, sys
-
-def main():
-    """Main function"""
-
-    try:
-        argv = sys.argv[1:]
-        opts, args = getopt.getopt(argv, 'sioh', ["status", "login", "logout", "help"])
-    except getopt.GetoptError, err:
-        print(err)
-        usage()
-        sys.exit()
-
-    for opt, arg in opts:
-        if opt == "-s" or opt == "--status":
-            print logonstatus()
-        elif opt == "-i" or opt == "--login":
-            log_in()
-        elif opt == "-o" or opt == "--logout":
-            log_out()
-        elif opt == "-h" or opt == "--help":
-            usage()
-            sys.exit()
-        else:
-            usage()
-            sys.exit()
-
-def usage():
-    """Print help for the user"""
-    print "Usage:", sys.argv[0], "OPTION"
-    print "Log in and out of HiN's wireless network\n"
-
-    print "-s\t\tChecks if you are logged in or not"
-    print "-i\t\tLog in to the network"
-    print "-o\t\tLog out of the network"
-
-    print "\nYou have to be connected to the Wireless Network before running the script"
+import urllib2, getpass, sys
+from optparse import OptionParser
 
 def getlogonstatus(websitedata):
     """Check if we're logged in or not"""
@@ -90,8 +55,37 @@ def log_out():
     else:
         print "Hmmm...not logged off... Strange..."
 
-    #logonstatus()
     sys.exit()
+
+
+def main():
+    """Main function"""
+
+    parser = OptionParser(description='Lets you log in via the authentication on the wireless network at HiN. You have to be connected to the wireless network before trying to use this program to authenticate.')
+    
+    parser.add_option("-s", "--status", 
+                      action="store_true", 
+                      dest="status",
+                      help="Print status -- checks if you are logged in or not.")
+    parser.add_option("-i", "--login", 
+                      action="store_true", 
+                      dest="login",
+                      help="Log in via the authentication site.")
+    parser.add_option("-o", "--logout", 
+                      action="store_true", 
+                      dest="logout",
+                      help="Log out.")
+
+    (options, args) = parser.parse_args()
+
+    if options.status:
+        logonstatus()
+    elif options.login:
+        log_in()
+    elif options.logout:
+        log_out()
+    else:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()
